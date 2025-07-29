@@ -41,7 +41,7 @@ jobs:
       - name: Step 01 - Download the plugin's source code
         uses: actions/checkout@v4
         with:
-          repository: ivmerk/wazuh-dashboard-plugins
+          repository: ${{ github.repository }}
           ref: ${{ inputs.reference }}
           path: wazuh
 
