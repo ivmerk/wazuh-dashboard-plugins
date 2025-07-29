@@ -44,7 +44,7 @@ jobs:
   # using a pre-built Docker image, hosted in Quay.io.
   deploy_and_run_command:
     name: Deploy and run command
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         plugins:
@@ -70,7 +70,7 @@ jobs:
       - name: Step 01 - Download the plugin's source code
         uses: actions/checkout@v4
         with:
-          repository: wazuh/wazuh-dashboard-plugins
+          repository: ivmerk/wazuh-dashboard-plugins
           ref: ${{ inputs.reference }}
           path: wazuh
 
