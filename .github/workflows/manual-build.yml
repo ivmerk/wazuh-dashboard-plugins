@@ -11,14 +11,14 @@ on:
       reference:
         required: true
         type: string
-        default: main
+        default: master
         description: Source code reference (branch, tag or commit SHA)
   workflow_dispatch:
     inputs:
       reference:
         required: true
         type: string
-        default: main
+        default: master
         description: Source code reference (branch, tag or commit SHA)
 
 jobs:
@@ -35,13 +35,13 @@ jobs:
   test-packages:
     needs: build
     name: Test packages
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Step 01 - Download the plugin's source code
         uses: actions/checkout@v4
         with:
-          repository: wazuh/wazuh-dashboard-plugins
+          repository: ivmerk/wazuh-dashboard-plugins
           ref: ${{ inputs.reference }}
           path: wazuh
 
