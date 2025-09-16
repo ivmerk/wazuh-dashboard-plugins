@@ -1,0 +1,10 @@
+{
+  "messages": {
+    "home.overview.stats.agentsSummary": "Сводка по агентам",
+    "home.overview.stats.goToAllAgents": "Перейти ко всем агентам",
+    "home.overview.stats.alerts": "Алерты за последние 24 часа",
+    "home.overview.stats.noAgentsTitle": "В этом экземпляре нет зарегистрированных агентов.",
+    "home.overview.stats.noAgentsDescription": "Пожалуйста, разверните агенты для мониторинга ваших конечных точек.",
+    "home.overview.stats.deployNewAgent": "Развернуть нового агента"
+  }
+}

@@ -12,6 +12,7 @@
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { i18n } from '@osd/i18n';
 import {
   EuiCard,
   EuiFlexItem,
@@ -73,7 +74,12 @@ export const Stats = withErrorBoundary(
 
     renderTitle(total) {
       return (
-        <EuiToolTip position='top' content={`Go to all agents`}>
+        <EuiToolTip
+          position='top'
+          content={i18n.translate('home.overview.stats.goToAllAgents', {
+            defaultMessage: 'Go to all agents',
+          })}
+        >
           <span>{total}</span>
         </EuiToolTip>
       );
@@ -106,7 +112,12 @@ export const Stats = withErrorBoundary(
       return (
         <EuiFlexGroup gutterSize='l'>
           <EuiFlexItem grow={false}>
-            <EuiCard betaBadgeLabel='Agents summary' title=''>
+            <EuiCard
+              betaBadgeLabel={i18n.translate('home.overview.stats.agentsSummary', {
+                defaultMessage: 'Agents summary',
+              })}
+              title=''
+            >
               {showAgentsChart ? (
                 <VisualizationBasic
                   isLoading={isAgentsLoading}
@@ -129,9 +140,13 @@ export const Stats = withErrorBoundary(
                 <EuiEmptyPrompt
                   body={
                     <p>
-                      This instance has no agents registered.
+                      {i18n.translate('home.overview.stats.noAgentsTitle', {
+                        defaultMessage: 'This instance has no agents registered.',
+                      })}
                       <br />
-                      Please deploy agents to begin monitoring your endpoints.
+                      {i18n.translate('home.overview.stats.noAgentsDescription', {
+                        defaultMessage: 'Please deploy agents to begin monitoring your endpoints.',
+                      })}
                     </p>
                   }
                   actions={
@@ -149,7 +164,9 @@ export const Stats = withErrorBoundary(
                         },
                       )}
                     >
-                      Deploy new agent
+                      {i18n.translate('home.overview.stats.deployNewAgent', {
+                        defaultMessage: 'Deploy new agent',
+                      })}
                     </WzButtonPermissions>
                   }
                 />
@@ -157,7 +174,12 @@ export const Stats = withErrorBoundary(
             </EuiCard>
           </EuiFlexItem>
           <EuiFlexItem>
-            <EuiCard betaBadgeLabel='Last 24 hours alerts' title=''>
+            <EuiCard
+              betaBadgeLabel={i18n.translate('home.overview.stats.alerts', {
+                defaultMessage: 'Last 24 hours alerts',
+              })}
+              title=''
+            >
               <EuiFlexGroup className='vulnerabilites-summary-card' wrap>
                 <LastAlertsStat severity='critical' />
                 <LastAlertsStat severity='high' />
