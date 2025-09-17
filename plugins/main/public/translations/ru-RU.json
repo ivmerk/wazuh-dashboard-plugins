@@ -5,6 +5,17 @@
     "home.overview.stats.alerts": "Алерты за последние 24 часа",
     "home.overview.stats.noAgentsTitle": "В этом экземпляре нет зарегистрированных агентов.",
     "home.overview.stats.noAgentsDescription": "Пожалуйста, разверните агенты для мониторинга ваших конечных точек.",
-    "home.overview.stats.deployNewAgent": "Развернуть нового агента"
+    "home.overview.stats.deployNewAgent": "Развернуть нового агента",
+    "management.cluster.nodes.title": "Узлы кластера",
+    "management.cluster.nodes.goBack": "Назад",
+    "management.cluster.nodes.tableTitle": "Узлы",
+    "management.cluster.nodes.columns.name": "Имя",
+    "management.cluster.nodes.columns.version": "Версия",
+    "management.cluster.nodes.columns.ip": "IP-адрес",
+    "management.cluster.nodes.columns.type": "Тип",
+    "management.cluster.nodes.searchBar.ip": "фильтровать по IP-адресу",
+    "management.cluster.nodes.searchBar.name": "фильтровать по имени",
+    "management.cluster.nodes.searchBar.type": "фильтровать по типу",
+    "management.cluster.nodes.searchBar.version": "фильтровать по версии"
   }
 }

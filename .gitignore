@@ -43,6 +43,7 @@ jspm_packages/
 !.vscode/launch.json
 !.vscode/extensions.json
 !.vscode/*.code-snippets
+.idea/*
 
 # Ignore code-workspaces
 *.code-workspace
