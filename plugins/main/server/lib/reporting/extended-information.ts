@@ -111,7 +111,9 @@ export async function buildAgentsTable(
     } else if (!agentsData.length && groupID) {
       // For group reports when there is no agents in the group
       printer.addContent({
-        text: 'There are no agents in this group.',
+        text: i18n.translate('reporting.extendedInformation.noAgentsInGroup', {
+          defaultMessage: 'There are no agents in this group.',
+        }),
         style: { fontSize: 12, color: '#000' },
       });
     }
@@ -149,9 +151,8 @@ export async function extendedInformation(
 ) {
   try {
     printer.logger.debug(
-      `Section ${section} and tab ${tab}, API is ${apiId}. From ${from} to ${to}. Filters ${JSON.stringify(
-        filters,
-      )}. Index pattern ${pattern}`,
+      `Section ${section} and tab ${tab}, API is ${apiId}. From ${from} to ${to}.
+      Filters ${JSON.stringify( filters, )}. Index pattern ${pattern}`,
     );
     if (section === 'agents' && !agent) {
       throw new Error(
@@ -186,7 +187,8 @@ export async function extendedInformation(
                 pattern,
               );
               return count
-                ? `${count} of ${totalAgents} agents have ${vulnerabilitiesLevel.toLocaleLowerCase()} vulnerabilities.`
+                ? `${count} of ${totalAgents} agents
+                 have ${vulnerabilitiesLevel.toLocaleLowerCase()} vulnerabilities.`
                 : undefined;
             } catch (error) {}
           }),
@@ -194,7 +196,12 @@ export async function extendedInformation(
       ).filter(vulnerabilitiesResponse => vulnerabilitiesResponse);
 
       printer.addList({
-        title: { text: 'Summary', style: 'h2' },
+        title: {
+          text: i18n.translate('reporting.extendedInformation.summary', {
+            defaultMessage: 'Summary',
+          }),
+          style: 'h2'
+        },
         list: vulnerabilitiesResponsesCount,
       });
 
@@ -238,7 +245,9 @@ export async function extendedInformation(
       );
       if (criticalRank && criticalRank.length) {
         printer.addContentWithNewLine({
-          text: 'Top 3 agents with critical severity vulnerabilities',
+          text: i18n.translate('reporting.extendedInformation.topAgentsCritical', {
+            defaultMessage: 'Top 3 agents with critical severity vulnerabilities',
+          }),
           style: 'h3',
         });
         await buildAgentsTable(context, printer, criticalRank, apiId);
@@ -247,7 +256,9 @@ export async function extendedInformation(
 
       if (highRank && highRank.length) {
         printer.addContentWithNewLine({
-          text: 'Top 3 agents with high severity vulnerabilities',
+          text: i18n.translate('reporting.extendedInformation.topAgentsHigh', {
+            defaultMessage: 'Top 3 agents with high severity vulnerabilities',
+          }),
           style: 'h3',
         });
         await buildAgentsTable(context, printer, highRank, apiId);
@@ -256,7 +267,9 @@ export async function extendedInformation(
 
       if (mediumRank && mediumRank.length) {
         printer.addContentWithNewLine({
-          text: 'Top 3 agents with medium severity vulnerabilities',
+          text: i18n.translate('reporting.extendedInformation.topAgentsMedium', {
+            defaultMessage: 'Top 3 agents with medium severity vulnerabilities',
+          }),
           style: 'h3',
         });
         await buildAgentsTable(context, printer, mediumRank, apiId);
@@ -265,7 +278,9 @@ export async function extendedInformation(
 
       if (lowRank && lowRank.length) {
         printer.addContentWithNewLine({
-          text: 'Top 3 agents with low severity vulnerabilities',
+          text: i18n.translate('reporting.extendedInformation.topAgentsLow', {
+            defaultMessage: 'Top 3 agents with low severity vulnerabilities',
+          }),
           style: 'h3',
         });
         await buildAgentsTable(context, printer, lowRank, apiId);
@@ -285,10 +300,25 @@ export async function extendedInformation(
       printer.logger.debug('Adding overview vulnerability detector top 3 CVEs');
       if (cveRank && cveRank.length) {
         printer.addSimpleTable({
-          title: { text: 'Top 3 CVE', style: 'h2' },
+          title: {
+            text: i18n.translate('reporting.extendedInformation.topCveTitle', {
+              defaultMessage: 'Top 3 CVE',
+            }),
+            style: 'h2'
+          },
           columns: [
-            { id: 'top', label: 'Top' },
-            { id: 'cve', label: 'CVE' },
+            {
+              id: 'top',
+              label: i18n.translate('reporting.extendedInformation.topColumn', {
+                defaultMessage: 'Top',
+              })
+            },
+            {
+              id: 'cve',
+              label: i18n.translate('reporting.extendedInformation.cveColumn', {
+                defaultMessage: 'CVE',
+              })
+            },
           ],
           items: cveRank.map(item => ({
             top: cveRank.indexOf(item) + 1,
@@ -313,7 +343,9 @@ export async function extendedInformation(
       printer.logger.debug('Adding top 3 agents with level 15 alerts');
       if (level15Rank.length) {
         printer.addContent({
-          text: 'Top 3 agents with level 15 alerts',
+          text: i18n.translate('reporting.extendedInformation.topAgentsLevel15Alerts', {
+            defaultMessage: 'Top 3 agents with level 15 alerts',
+          }),
           style: 'h2',
         });
         await buildAgentsTable(context, printer, level15Rank, apiId);
@@ -334,11 +366,16 @@ export async function extendedInformation(
       if (top5RootkitsRank && top5RootkitsRank.length) {
         printer
           .addContentWithNewLine({
-            text: 'Most common rootkits found among your agents',
+            text: i18n.translate('reporting.extendedInformation.mostCommonRootkits', {
+              defaultMessage: 'Most common rootkits found among your agents',
+            }),
             style: 'h2',
           })
           .addContentWithNewLine({
-            text: 'Rootkits are a set of software tools that enable an unauthorized user to gain control of a computer system without being detected.',
+            text: i18n.translate('reporting.extendedInformation.rootkitDescription', {
+              defaultMessage: 'Rootkits are a set of software tools that enable an ' +
+                'unauthorized user to gain control of a computer system without being detected.'
+            }),
             style: 'standard',
           })
           .addSimpleTable({
@@ -361,12 +398,17 @@ export async function extendedInformation(
       );
       hiddenPids &&
         printer.addContent({
-          text: `${hiddenPids} of ${totalAgents} agents have hidden processes`,
+          text: i18n.translate('reporting.extendedInformation.agentsWithHiddenProcesses', {
+            defaultMessage: '{hiddenPids} of {totalAgents} agents have hidden processes',
+            values: { hiddenPids, totalAgents }
+          }),
           style: 'h3',
         });
       !hiddenPids &&
         printer.addContentWithNewLine({
-          text: `No agents have hidden processes`,
+          text: i18n.translate('reporting.extendedInformation.noHiddenProcesses', {
+            defaultMessage: 'No agents have hidden processes',
+          }),
           style: 'h3',
         });
 
@@ -377,14 +419,18 @@ export async function extendedInformation(
         filters,
         pattern,
       );
-      hiddenPorts &&
-        printer.addContent({
-          text: `${hiddenPorts} of ${totalAgents} agents have hidden ports`,
+      hiddenPorts
+        ? printer.addContent({
+          text: i18n.translate('reporting.extendedInformation.agentsWithHiddenPorts', {
+            defaultMessage: '{hiddenPorts} of {totalAgents} agents have hidden ports',
+            values: { hiddenPorts, totalAgents }
+          }),
           style: 'h3',
-        });
-      !hiddenPorts &&
-        printer.addContent({
-          text: `No agents have hidden ports`,
+        })
+        : printer.addContent({
+          text: i18n.translate('reporting.extendedInformation.noAgentsWithHiddenPorts', {
+            defaultMessage: 'No agents have hidden ports',
+          }),
           style: 'h3',
         });
       printer.addNewLine();
@@ -401,7 +447,9 @@ export async function extendedInformation(
         pattern,
       );
       printer.addContentWithNewLine({
-        text: 'Most common PCI DSS requirements alerts found',
+        text: i18n.translate('reporting.extendedInformation.mostCommonPciDssAlerts', {
+          defaultMessage: 'Most common PCI DSS requirements alerts found',
+        }),
         style: 'h2',
       });
       for (const item of topPciRequirements) {
@@ -414,7 +462,10 @@ export async function extendedInformation(
           pattern,
         );
         printer.addContentWithNewLine({
-          text: `Requirement ${item}`,
+          text: i18n.translate('reporting.extendedInformation.requirement', {
+            defaultMessage: 'Requirement {item}',
+            values: { item }
+          }),
           style: 'h3',
         });
 
@@ -450,7 +501,9 @@ export async function extendedInformation(
         pattern,
       );
       printer.addContentWithNewLine({
-        text: 'Most common TSC requirements alerts found',
+        text: i18n.translate('reporting.extendedInformation.mostCommonTscAlerts', {
+          defaultMessage: 'Most common TSC requirements alerts found',
+        }),
         style: 'h2',
       });
       for (const item of topTSCRequirements) {
@@ -463,7 +516,10 @@ export async function extendedInformation(
           pattern,
         );
         printer.addContentWithNewLine({
-          text: `Requirement ${item}`,
+          text: i18n.translate('reporting.extendedInformation.requirement', {
+            defaultMessage: 'Requirement {item}',
+            values: { item }
+          }),
           style: 'h3',
         });
 
@@ -499,7 +555,9 @@ export async function extendedInformation(
         pattern,
       );
       printer.addContentWithNewLine({
-        text: 'Most common GDPR requirements alerts found',
+        text: i18n.translate('reporting.extendedInformation.mostCommonGdprAlerts', {
+          defaultMessage: 'Most common GDPR requirements alerts found',
+        }),
         style: 'h2',
       });
       for (const item of topGdprRequirements) {
@@ -512,7 +570,10 @@ export async function extendedInformation(
           pattern,
         );
         printer.addContentWithNewLine({
-          text: `Requirement ${item}`,
+          text: i18n.translate('reporting.extendedInformation.requirement', {
+            defaultMessage: 'Requirement {item}',
+            values: { item }
+          }),
           style: 'h3',
         });
 
@@ -553,7 +614,9 @@ export async function extendedInformation(
         );
       if (auditAgentsNonSuccess && auditAgentsNonSuccess.length) {
         printer.addContent({
-          text: 'Agents with high number of failed sudo commands',
+          text: i18n.translate('reporting.extendedInformation.agentsWithFailedSudo', {
+            defaultMessage: 'Agents with high number of failed sudo commands',
+          }),
           style: 'h2',
         });
         await buildAgentsTable(context, printer, auditAgentsNonSuccess, apiId);
@@ -624,11 +687,16 @@ export async function extendedInformation(
 
       if (agents && agents.length) {
         printer.addContentWithNewLine({
-          text: 'Agents with suspicious FIM activity',
+          text: i18n.translate('reporting.extendedInformation.suspiciousFimActivity', {
+            defaultMessage: 'Agents with suspicious FIM activity',
+          }),
           style: 'h2',
         });
         printer.addContentWithNewLine({
-          text: 'Top 3 agents that have most FIM alerts from level 7 to level 15. Take care about them.',
+          text: i18n.translate('reporting.extendedInformation.suspiciousFimDescription', {
+            defaultMessage: 'Top 3 agents that have most FIM alerts ' +
+              'from level 7 to level 15. Take care about them.',
+          }),
           style: 'standard',
         });
         await buildAgentsTable(context, printer, agents, apiId);
@@ -649,11 +717,23 @@ export async function extendedInformation(
         auditFailedSyscall.length &&
         printer.addSimpleTable({
           columns: [
-            { id: 'id', label: 'id' },
-            { id: 'syscall', label: 'Syscall' },
+            {
+              id: 'id',
+              label: i18n.translate('reporting.extendedInformation.idColumn', {
+                defaultMessage: 'ID',
+              })
+            },
+            {
+              id: 'syscall',
+              label: i18n.translate('reporting.extendedInformation.syscallColumn', {
+                defaultMessage: 'Syscall',
+              })
+            },
           ],
           items: auditFailedSyscall,
-          title: 'Most common failing syscalls',
+          title: i18n.translate('reporting.extendedInformation.mostCommonFailingSyscalls', {
+            defaultMessage: 'Most common failing syscalls',
+          }),
         });
     }
 
@@ -673,15 +753,31 @@ export async function extendedInformation(
         const lastScanData = lastScanResponse.data.data.affected_items[0];
         if (lastScanData.start && lastScanData.end) {
           printer.addContent({
-            text: `Last file integrity monitoring scan was executed from ${lastScanData.start} to ${lastScanData.end}.`,
+            text: i18n.translate('reporting.extendedInformation.lastScanMessage', {
+              defaultMessage: 'Last file integrity monitoring scan was ' +
+                'executed from {start} to {end}.',
+              values: {
+                start: lastScanData.start,
+                end: lastScanData.end
+              }
+            }),
           });
         } else if (lastScanData.start) {
           printer.addContent({
-            text: `File integrity monitoring scan is currently in progress for this agent (started on ${lastScanData.start}).`,
+            text: i18n.translate('reporting.extendedInformation.scanInProgressWithDate', {
+              defaultMessage: 'File integrity monitoring scan is ' +
+                'currently in progress for this agent (started on {start}).',
+              values: {
+                start: lastScanData.start
+              }
+            }),
           });
         } else {
           printer.addContent({
-            text: `File integrity monitoring scan is currently in progress for this agent.`,
+            text: i18n.translate('reporting.extendedInformation.scanInProgress', {
+              defaultMessage: 'File integrity monitoring scan is ' +
+                'currently in progress for this agent.',
+            }),
           });
         }
         printer.addNewLine();
@@ -700,11 +796,23 @@ export async function extendedInformation(
         lastTenDeleted.length &&
         printer.addSimpleTable({
           columns: [
-            { id: 'path', label: 'Path' },
-            { id: 'date', label: 'Date' },
+            {
+              id: 'path',
+              label: i18n.translate('reporting.extendedInformation.pathColumn', {
+                defaultMessage: 'Path',
+              })
+            },
+            {
+              id: 'date',
+              label: i18n.translate('reporting.extendedInformation.dateColumn', {
+                defaultMessage: 'Date',
+              })
+            },
           ],
           items: lastTenDeleted,
-          title: 'Last 10 deleted files',
+          title: i18n.translate('reporting.extendedInformation.last10DeletedFiles', {
+            defaultMessage: 'Last 10 deleted files',
+          }),
         });
 
       printer.logger.debug('Fetching last 10 modified files');
@@ -857,11 +965,17 @@ export async function extendedInformation(
       );
       if (topCriticalPackages && topCriticalPackages.length) {
         printer.addContentWithNewLine({
-          text: 'Critical severity',
+          text: i18n.translate('reporting.extendedInformation.criticalSeverity', {
+            defaultMessage: 'Critical severity',
+          }),
           style: 'h2',
         });
         printer.addContentWithNewLine({
-          text: 'These vulnerabilties are critical, please review your agent. Click on each link to read more about each found vulnerability.',
+          text: i18n.translate('reporting.extendedInformation.criticalVulnerabilitiesWarning', {
+            defaultMessage:
+              'These vulnerabilties are critical, please review your agent. ' +
+              'Click on each link to read more about each found vulnerability.',
+          }),
           style: 'standard',
         });
         const customul = [];
@@ -887,9 +1001,16 @@ export async function extendedInformation(
         pattern,
       );
       if (topHighPackages && topHighPackages.length) {
-        printer.addContentWithNewLine({ text: 'High severity', style: 'h2' });
         printer.addContentWithNewLine({
-          text: 'Click on each link to read more about each found vulnerability.',
+          text: i18n.translate('reporting.extendedInformation.highSeverity', {
+            defaultMessage: 'High severity',
+          }),
+          style: 'h2'
+        });
+        printer.addContentWithNewLine({
+          text: i18n.translate('reporting.extendedInformation.highVulnerabilitiesWarning', {
+            defaultMessage: 'Click on each link to read more about each found vulnerability.',
+          }),
           style: 'standard',
         });
         const customul = [];
