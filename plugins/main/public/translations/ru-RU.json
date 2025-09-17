@@ -16,6 +16,20 @@
     "management.cluster.nodes.searchBar.ip": "фильтровать по IP-адресу",
     "management.cluster.nodes.searchBar.name": "фильтровать по имени",
     "management.cluster.nodes.searchBar.type": "фильтровать по типу",
-    "management.cluster.nodes.searchBar.version": "фильтровать по версии"
+    "management.cluster.nodes.searchBar.version": "фильтровать по версии",
+    "management.cluster.overview.details.title": "Детали",
+    "management.cluster.overview.viewOverview": "Просмотр обзора",
+    "management.cluster.overview.information.title": "Информация",
+    "management.cluster.overview.nodes": "Узлы",
+    "management.cluster.overview.agents": "Агенты",
+    "management.cluster.overview.ipAddress": "IP-адрес",
+    "management.cluster.overview.running": "Запущен",
+    "management.cluster.overview.version": "Версия",
+    "management.cluster.overview.no": "нет",
+    "management.cluster.overview.clickToOpenNodes": "Нажмите, чтобы открыть список узлов",
+    "management.cluster.overview.clickToOpenAgents": "Нажмите, чтобы открыть список агентов",
+    "management.cluster.overview.noResultsMessage": "Нет результатов для выбранного временного диапазона. Попробуйте другой.",
+    "management.cluster.overview.dashboardTitle": "Панель управления кластером Timelions",
+    "management.cluster.overview.dashboardDescription": "Панель управления кластера Timelions"
   }
 }
