@@ -28,7 +28,7 @@ import { AppState } from '../../react-services/app-state';
 import { UI_ERROR_SEVERITIES } from '../../react-services/error-orchestrator/types';
 import { UI_LOGGER_LEVELS } from '../../../common/constants';
 import { getErrorOrchestrator } from '../../react-services/common-services';
-import { i18n } from '@kbn/i18n';
+import { i18n } from '@osd/i18n';
 import {
   amazonWebServices,
   docker,
