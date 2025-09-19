@@ -1,4 +1,5 @@
 import React from 'react';
+import { i18n } from '@osd/i18n';
 import {
   EuiFlexItem,
   EuiButtonEmpty,
@@ -72,7 +73,11 @@ export const OverviewCards = ({
               >
                 <EuiFlexItem grow={false}>
                   <EuiTitle size='s'>
-                    <h2>Details</h2>
+                    <h2>
+                      {i18n.translate('management.cluster.overview.details.title', {
+                        defaultMessage: 'Details',
+                      })}
+                    </h2>
                   </EuiTitle>
                 </EuiFlexItem>
                 <EuiFlexItem grow={false}>
@@ -82,7 +87,9 @@ export const OverviewCards = ({
                     onClick={goConfiguration}
                     iconType='visPie'
                   >
-                    View Overview
+                    {i18n.translate('management.cluster.overview.viewOverview', {
+                      defaultMessage: 'View Overview',
+                    })}
                   </EuiButtonEmpty>
                 </EuiFlexItem>
               </EuiFlexGroup>
@@ -94,15 +101,23 @@ export const OverviewCards = ({
               compressed
               listItems={[
                 {
-                  title: 'IP address',
+                  title: i18n.translate('management.cluster.overview.ipAddress', {
+                    defaultMessage: 'IP address',
+                  }),
                   description: configuration?.nodes[0] || '-',
                 },
                 {
-                  title: 'Running',
-                  description: status ?? 'no',
+                  title: i18n.translate('management.cluster.overview.running', {
+                    defaultMessage: 'Running',
+                  }),
+                  description: status ?? i18n.translate('management.cluster.overview.no', {
+                    defaultMessage: 'no',
+                  }),
                 },
                 {
-                  title: 'Version',
+                  title: i18n.translate('management.cluster.overview.version', {
+                    defaultMessage: 'Version',
+                  }),
                   description: version ?? '-',
                 },
               ]}
@@ -120,7 +135,9 @@ export const OverviewCards = ({
             textAlign='left'
             title={
               <span className='euiTitle euiTitle--small euiCard__title'>
-                Information
+                {i18n.translate('management.cluster.overview.information.title', {
+                  defaultMessage: 'Information',
+                })}
               </span>
             }
           >
@@ -132,7 +149,9 @@ export const OverviewCards = ({
                 {
                   title: (
                     <EuiToolTip
-                      content='Click to open the list of nodes'
+                      content={i18n.translate('management.cluster.overview.clickToOpenNodes', {
+                        defaultMessage: 'Click to open the list of nodes',
+                      })}
                       position='left'
                     >
                       <EuiButtonEmpty
@@ -141,13 +160,17 @@ export const OverviewCards = ({
                         onClick={goNodes}
                         style={{ height: 'auto' }}
                       >
-                        Nodes
+                        {i18n.translate('management.cluster.overview.nodes', {
+                          defaultMessage: 'Nodes',
+                        })}
                       </EuiButtonEmpty>
                     </EuiToolTip>
                   ),
                   description: (
                     <EuiToolTip
-                      content='Click to open the list of nodes'
+                      content={i18n.translate('management.cluster.overview.clickToOpenNodes', {
+                        defaultMessage: 'Click to open the list of nodes',
+                      })}
                       position='right'
                     >
                       <EuiButtonEmpty
@@ -164,7 +187,9 @@ export const OverviewCards = ({
                 {
                   title: (
                     <EuiToolTip
-                      content='Click to open the list of agents'
+                      content={i18n.translate('management.cluster.overview.clickToOpenAgents', {
+                        defaultMessage: 'Click to open the list of agents',
+                      })}
                       position='left'
                     >
                       <EuiButtonEmpty
@@ -173,13 +198,17 @@ export const OverviewCards = ({
                         onClick={goAgents}
                         style={{ height: 'auto' }}
                       >
-                        Agents
+                        {i18n.translate('management.cluster.overview.agents', {
+                          defaultMessage: 'Agents',
+                        })}
                       </EuiButtonEmpty>
                     </EuiToolTip>
                   ),
                   description: (
                     <EuiToolTip
-                      content='Click to open the list of agents'
+                      content={i18n.translate('management.cluster.overview.clickToOpenAgents', {
+                        defaultMessage: 'Click to open the list of agents',
+                      })}
                       position='right'
                     >
                       <EuiButtonEmpty
@@ -218,8 +247,12 @@ export const OverviewCards = ({
                 from: searchBarProps?.dateRangeFrom,
                 to: searchBarProps?.dateRangeTo,
               },
-              title: 'Cluster Timelions dashboard',
-              description: 'Dashboard of the Cluster Timelions',
+              title: i18n.translate('management.cluster.overview.dashboardTitle', {
+                defaultMessage: 'Cluster Timelions dashboard',
+              }),
+              description: i18n.translate('management.cluster.overview.dashboardDescription', {
+                defaultMessage: 'Dashboard of the Cluster Timelions',
+              }),
               query: searchBarProps.query,
               refreshConfig: {
                 pause: false,
@@ -232,8 +265,9 @@ export const OverviewCards = ({
         </div>
       ) : (
         <DiscoverNoResults
-          message='There are no results for selected time range. Try another
-            one.'
+          message={i18n.translate('management.cluster.overview.noResultsMessage', {
+            defaultMessage: 'There are no results for selected time range. Try another one.',
+          })}
         />
       )}
     </>

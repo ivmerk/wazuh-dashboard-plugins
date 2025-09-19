@@ -200,7 +200,8 @@ export const mitreAttack = {
   }),
   description: i18n.translate('wz-app-mitre-attack-description', {
     defaultMessage:
-      'Explore security alerts mapped to adversary tactics and techniques for better threat understanding.',
+      'Explore security alerts mapped to adversary tactics and techniques ' +
+      'for better threat understanding.',
   }),
   euiIconType: 'grokApp',
   order: 302,
@@ -225,7 +226,8 @@ const pciDss = {
   }),
   description: i18n.translate('wz-app-pci-dss-description', {
     defaultMessage:
-      'Global security standard for entities that process, store, or transmit payment cardholder data.',
+      'Global security standard for entities that process, store, or ' +
+      'transmit payment cardholder data.',
   }),
   euiIconType: 'visTagCloud',
   order: 400,
@@ -275,7 +277,8 @@ const hipaa = {
   }),
   description: i18n.translate('wz-app-hipaa-description', {
     defaultMessage:
-      'Health Insurance Portability and Accountability Act of 1996 (HIPAA) provides data privacy and security provisions for safeguarding medical information.',
+      'Health Insurance Portability and Accountability Act of 1996 (HIPAA) ' +
+      'provides data privacy and security provisions for safeguarding medical information.',
   }),
   euiIconType: 'monitoringApp',
   order: 402,
@@ -300,7 +303,8 @@ const nist80053 = {
   }),
   description: i18n.translate('wz-app-nist-800-53-description', {
     defaultMessage:
-      'National Institute of Standards and Technology Special Publication 800-53 (NIST 800-53) sets guidelines for federal information systems.',
+      'National Institute of Standards and Technology Special Publication ' +
+      '800-53 (NIST 800-53) sets guidelines for federal information systems.',
   }),
   euiIconType: 'notebookApp',
   showInOverviewApp: true,
@@ -325,7 +329,8 @@ const tsc = {
   }),
   description: i18n.translate('wz-app-tsc-description', {
     defaultMessage:
-      'Trust Services Criteria for Security, Availability, Processing Integrity, Confidentiality, and Privacy.',
+      'Trust Services Criteria for Security, Availability, Processing ' +
+      'Integrity, Confidentiality, and Privacy.',
   }),
   euiIconType: 'packetbeatApp',
   order: 404,
@@ -350,7 +355,8 @@ export const docker = {
   }),
   description: i18n.translate('wz-app-docker-description', {
     defaultMessage:
-      'Monitor and collect the activity from Docker containers such as creation, running, starting, stopping or pausing events.',
+      'Monitor and collect the activity from Docker containers ' +
+      'such as creation, running, starting, stopping or pausing events.',
   }),
   euiIconType: LogoDocker,
   order: 500,
@@ -403,7 +409,8 @@ export const googleCloud = {
   }),
   description: i18n.translate('wz-app-google-cloud-description', {
     defaultMessage:
-      'Security events related to your Google Cloud Platform services, collected directly via GCP API.',
+      'Security events related to your Google Cloud Platform services, ' +
+      'collected directly via GCP API.',
   }),
   euiIconType: LogoGoogleCloud,
   order: 502,
@@ -916,7 +923,9 @@ export const Categories = [
   },
   {
     id: 'management',
-    label: 'Indexer management',
+    label: i18n.translate('wz-app-management-label', {
+      defaultMessage: 'Indexer management',
+    }),
     order: 5e3,
     euiIconType: 'managementApp',
   },
