@@ -11,6 +11,7 @@ import { getLast24HoursAlerts } from './last-alerts-service';
 import { UI_COLOR_STATUS } from '../../../../../common/constants';
 import { getCore } from '../../../../kibana-services';
 import { RedirectAppLinks } from '../../../../../../../src/plugins/opensearch_dashboards_react/public';
+import { i18n } from '@osd/i18n';
 import {
   ErrorHandler,
   ErrorFactory,
@@ -22,7 +23,7 @@ import {
 } from '../../../../components/common/data-source/pattern/pattern-data-source-filter-manager';
 import { formatUINumber } from '../../../../react-services/format-number';
 
-type SeverityKey = 'low' | 'medium' | 'high' | 'critical';
+type SeverityKey = 'low' | 'medium' | 'high' | 'critical' | string;
 
 export const severities = {
   low: {
@@ -111,7 +112,11 @@ export function LastAlertsStat({
           ]);
 
         const destURL = core.application.getUrlForApp(discoverLocation.app, {
-          path: `${discoverLocation.basePath}#?_a=(discover:(columns:!(_source),isDirty:!f,sort:!()),metadata:(indexPattern:'${indexPatternId}',view:discover))&_g=${predefinedFilters}&_q=(filters:!(),query:(language:kuery,query:''))`,
+          path:
+            `${discoverLocation.basePath}#?_a=(discover:(columns:!(_source),isDirty:!f,sort:!()),` +
+            `metadata:(indexPattern:'${indexPatternId}',view:discover))` +
+            `&_g=${predefinedFilters}` +
+            `&_q=(filters:!(),query:(language:kuery,query:''))`,
         });
         setDiscoverLocation(destURL);
       } catch (error) {
@@ -126,7 +131,11 @@ export function LastAlertsStat({
   }, []);
 
   const statDescription =
-    direction === 'row' ? `${severity.label} severity` : '';
+    direction === 'row'
+      ? `${severity.label} ${i18n.translate('home.overview.stats.alerts.low', {
+        defaultMessage: 'low',
+      })}`
+      : '';
   const statValue =
     direction === 'row'
       ? `${countLastAlerts ?? '-'}`
@@ -167,11 +176,17 @@ export function LastAlertsStat({
         />
         {hideBottomText ? null : (
           <EuiText size='s' css='margin-top: 0.7vh'>
-            {'Rule level ' +
-              ruleLevelRange.minRuleLevel +
-              (ruleLevelRange.maxRuleLevel
-                ? ' to ' + ruleLevelRange.maxRuleLevel
-                : ' or higher')}
+            {`${i18n.translate('home.overview.stats.alerts.ruleLevel', {
+              defaultMessage: 'Rule level ',
+            })}${ruleLevelRange.minRuleLevel}${
+              ruleLevelRange.maxRuleLevel
+                ? ` ${i18n.translate('home.overview.stats.alerts.to', {
+                  defaultMessage: 'to',
+                })} ${ruleLevelRange.maxRuleLevel}`
+                : ` ${i18n.translate('home.overview.stats.alerts.orHigher', {
+                  defaultMessage: 'or higher',
+                })}`
+            }`}
           </EuiText>
         )}
       </RedirectAppLinks>
