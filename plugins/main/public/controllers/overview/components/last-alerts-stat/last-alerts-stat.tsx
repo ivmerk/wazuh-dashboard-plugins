@@ -74,7 +74,14 @@ export function LastAlertsStat({
   const [countLastAlerts, setCountLastAlerts] = useState<number | null>(null);
   const [discoverLocation, setDiscoverLocation] = useState<string>('');
 
-  const severity = severities[severityKey];
+  const severity = severities[severityKey] || {
+    label: 'Unknown',
+    color: UI_COLOR_STATUS.subdued,
+    ruleLevelRange: {
+      minRuleLevel: 0,
+      maxRuleLevel: undefined,
+    },
+  };
   const ruleLevelRange = severity.ruleLevelRange;
 
   useEffect(() => {
