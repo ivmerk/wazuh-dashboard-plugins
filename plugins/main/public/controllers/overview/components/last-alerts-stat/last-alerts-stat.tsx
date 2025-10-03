@@ -76,7 +76,7 @@ export function LastAlertsStat({
 
   const severity = severities[severityKey] || {
     label: 'Unknown',
-    color: UI_COLOR_STATUS.subdued,
+    color: UI_COLOR_STATUS.disabled,
     ruleLevelRange: {
       minRuleLevel: 0,
       maxRuleLevel: undefined,
