@@ -181,10 +181,10 @@ export const Stats = withErrorBoundary(
               title=''
             >
               <EuiFlexGroup className='vulnerabilites-summary-card' wrap>
-                <LastAlertsStat severity='critical' />
-                <LastAlertsStat severity='high' />
-                <LastAlertsStat severity='medium' />
-                <LastAlertsStat severity='low' />
+                <LastAlertsStat severity="critical" />
+                <LastAlertsStat severity="high" />
+                <LastAlertsStat severity="medium" />
+                <LastAlertsStat severity="low" />
               </EuiFlexGroup>
             </EuiCard>
           </EuiFlexItem>
