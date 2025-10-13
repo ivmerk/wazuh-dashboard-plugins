@@ -139,7 +139,11 @@ export function LastAlertsStat({
 
   const statDescription =
     direction === 'row'
-      ? `${severity.label} ${i18n.translate(
+      ? `${i18n.translate(
+        'home.overview.stats.alerts.' + severity.label.toLowerCase(),
+        {
+          defaultMessage: severity.label
+        })} ${i18n.translate(
         'home.overview.stats.alerts.severity',
         {
           defaultMessage: 'severity',
